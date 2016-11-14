@@ -8,7 +8,7 @@
 
 int main( int argc, char* argv[] )
 {
-    Random random( time( nullptr ) );
+    Random random( (unsigned int)time( nullptr ) );
 
     std::fstream nouns( "nouns.txt", std::fstream::in );
     std::fstream verbs( "verbs.txt", std::fstream::in );

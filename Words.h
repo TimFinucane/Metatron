@@ -19,7 +19,7 @@ namespace Syntax
         
         std::string     chooseRandom( RandomGenerator* random )
         {
-            return _words[random->generateInteger( _words.size() )];
+            return _words[random->generateInteger( (unsigned int)_words.size() )];
         }
         std::string     operator[]( unsigned int index )
         {

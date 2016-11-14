@@ -203,8 +203,6 @@ std::string Words::generateVerb( RandomGenerator* random, const Verb& verb )
         if( verb.negative )
             out += "not ";
 
-        if( verb.
-
         if( verb.active )
             out += basicVerbs.chooseRandom( random );
         else
