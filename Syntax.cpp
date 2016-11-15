@@ -1,11 +1,11 @@
-#include "Formation.h"
+#include "Syntax.h"
 #include "Language.h"
 
 #include <algorithm>
 
 using namespace Syntax;
 
-AdjectiveWord   AdjectiveWord::construct( RandomGenerator* generator, bool plural )
+Adjective       Adjective::construct( RandomGenerator* generator, bool plural )
 {
     unsigned int num = generator->generateInteger( 4 );
 

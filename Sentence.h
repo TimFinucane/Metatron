@@ -1,6 +1,8 @@
 #pragma once
 
-#include "Formation.h"
+#include <utility>
+
+#include "Syntax.h"
 #include "WordGenerator.h"
 
 namespace Syntax
@@ -29,10 +31,10 @@ namespace Syntax
             return out;
         }
 
-        NounPhrase  subject;
-        Verb        verb;
+        Noun::Type  subject;
+        Verb::Type  verb;
 
         // Optional
-        NounPhrase  object;
+        Noun::Type  object;
     };
 }

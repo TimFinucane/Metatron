@@ -13,6 +13,14 @@ namespace Syntax
     // TODO: Pronouns in non-possessives
     // TODO: Dynamics in verbs
 
+    struct Element
+    {
+    public:
+        virtual std::string construct();
+
+        virtual ~Element() = 0;
+    };
+
     enum class Person
     {
         FIRST,
@@ -21,17 +29,17 @@ namespace Syntax
     };
     struct NounPhrase;
 
-    //struct AdjectiveClause;
-    struct AdjectiveWord
+    struct Adjective : public Element
     {
-    public:
-        enum class Type
-        {
-            DEMONSTRATIVE,
-            POSSESSIVE,
-            QUANTITATIVE,
-            DESCRIPTIVE
-        };
+        typedef std::unique_ptr<Adjective> Type;
+        
+        static Type     create( Random* random, const Noun& noun );
+
+        unsigned int    priority;   // Priority in the sequence
+        bool            pre;        // Whether or not it is before the noun
+    };
+    struct Descriptive : public Adjective
+    {
         enum class Degree : unsigned int
         {
             POSITIVE,
@@ -39,40 +47,33 @@ namespace Syntax
             SUPERLATIVE
         };
     public:
-        static AdjectiveWord    construct( RandomGenerator* generator, bool plural );
-
-        Type                        type;
-
-        // For if the adjective is descriptive
-        Degree                      degree;
-
-        // Number to use, for if the adjective is quantitative
-        unsigned int                amount;
-
-        // For if the adjective is demonstrative
-        bool                        plural;
-
-        // A possessive noun, if the adjective is actually possessive
-        std::unique_ptr<NounPhrase> possessiveNoun;
+        Degree degree;
     };
-    struct AdjectivePhrase
+    struct Quantitative : public Adjective
     {
-        static AdjectivePhrase      construct( RandomGenerator* generator, bool plural )
-        {
-            AdjectivePhrase phrase;
-            phrase.word = AdjectiveWord::construct( generator, plural );
-
-            return phrase;
-        }
-
-        // TODO: Expand
-        // For now, just a word
-        AdjectiveWord word;
+        unsigned int amount;
     };
-
+    struct Demonstrative : public Adjective
+    {
+        bool plural;
+    };
 
     // A complete subject/object
-    struct NounPhrase
+    struct Noun : public Element
+    {
+    public:
+        typedef std::unique_ptr<Noun> Type;
+    public:
+        static Type create();
+
+        Person  person;
+        bool    plural;
+    };
+    struct Pronoun : public Noun
+    {
+        std::string generate();
+    };
+    struct NounWord : public Noun
     {
     public:
         // A premodifier is either an article, a possessive, or a demonstrative
@@ -85,15 +86,22 @@ namespace Syntax
     public:
         static NounPhrase               construct( RandomGenerator* generator );
 
-        std::vector<AdjectivePhrase>    adjectivePhrases;
-        bool                            plural;
+        std::string                     generate();
+
+        std::vector<Adjective::Type>    adjectivePhrases;
         Premodifier                     premodifier;
     };
 
+    struct Qualitative : public Adjective
+    {
+        Noun::Type noun;
+    };
 
-    struct Verb
+    struct Verb : public Element
     {
     public:
+        typedef std::unique_ptr<Verb> Type;
+
         enum class Conjugation
         {
             PRESENT,
@@ -105,7 +113,7 @@ namespace Syntax
         };
 
     public:
-        static Verb     construct( RandomGenerator* generator, bool plural, Person person );
+        static Verb     construct( RandomGenerator* generator, const Noun& noun );
 
         Conjugation     conjugation;
 
@@ -119,5 +127,10 @@ namespace Syntax
         bool            transitive; // Has an object 
 
         bool            dynamic; // The ing ending TODO IMPLEMENT
+    };
+
+    struct Adverb : public Element
+    {
+        // TODO:
     };
 }

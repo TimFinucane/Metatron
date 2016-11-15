@@ -10,9 +10,6 @@
     <ClInclude Include="Sentence.h">
       <Filter>Syntax</Filter>
     </ClInclude>
-    <ClInclude Include="Formation.h">
-      <Filter>Syntax</Filter>
-    </ClInclude>
     <ClInclude Include="WordGenerator.h">
       <Filter>Syntax</Filter>
     </ClInclude>
@@ -20,6 +17,9 @@
       <Filter>Helper</Filter>
     </ClInclude>
     <ClInclude Include="Words.h">
+      <Filter>Syntax</Filter>
+    </ClInclude>
+    <ClInclude Include="Syntax.h">
       <Filter>Syntax</Filter>
     </ClInclude>
   </ItemGroup>
@@ -32,9 +32,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Formation.cpp">
-      <Filter>Syntax</Filter>
-    </ClCompile>
     <ClCompile Include="Words.cpp">
       <Filter>Syntax</Filter>
     </ClCompile>
@@ -44,6 +41,9 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Language.cpp">
       <Filter>Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="Syntax.cpp">
+      <Filter>Syntax</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

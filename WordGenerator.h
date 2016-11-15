@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include "Formation.h"
+#include "Syntax.h"
 
 namespace Syntax
 {
