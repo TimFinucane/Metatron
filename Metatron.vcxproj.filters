@@ -7,12 +7,6 @@
     <ClInclude Include="Language.h">
       <Filter>Helper</Filter>
     </ClInclude>
-    <ClInclude Include="Sentence.h">
-      <Filter>Syntax</Filter>
-    </ClInclude>
-    <ClInclude Include="WordGenerator.h">
-      <Filter>Syntax</Filter>
-    </ClInclude>
     <ClInclude Include="Random.h">
       <Filter>Helper</Filter>
     </ClInclude>
@@ -20,6 +14,9 @@
       <Filter>Syntax</Filter>
     </ClInclude>
     <ClInclude Include="Syntax.h">
+      <Filter>Syntax</Filter>
+    </ClInclude>
+    <ClInclude Include="WordChooser.h">
       <Filter>Syntax</Filter>
     </ClInclude>
   </ItemGroup>

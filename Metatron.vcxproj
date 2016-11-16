@@ -120,8 +120,7 @@
     <ClInclude Include="Random.h" />
     <ClInclude Include="RandomGenerator.h" />
     <ClInclude Include="Language.h" />
-    <ClInclude Include="Sentence.h" />
-    <ClInclude Include="WordGenerator.h" />
+    <ClInclude Include="WordChooser.h" />
     <ClInclude Include="Words.h" />
   </ItemGroup>
   <ItemGroup>

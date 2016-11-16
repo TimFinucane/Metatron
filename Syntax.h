@@ -4,7 +4,7 @@
 #include <vector>
 #include <memory>
 
-#include "RandomGenerator.h"
+#include "WordChooser.h"
 
 namespace Syntax
 {
@@ -13,12 +13,13 @@ namespace Syntax
     // TODO: Pronouns in non-possessives
     // TODO: Dynamics in verbs
 
+    template <typename T>
+    using Synt = std::unique_ptr<T>;
+
     struct Element
     {
     public:
-        virtual std::string construct();
-
-        virtual ~Element() = 0;
+        virtual std::string form( RandomGenerator& random, const WordChooser& words ) = 0;
     };
 
     enum class Person
@@ -27,14 +28,9 @@ namespace Syntax
         SECOND,
         THIRD
     };
-    struct NounPhrase;
 
     struct Adjective : public Element
     {
-        typedef std::unique_ptr<Adjective> Type;
-        
-        static Type     create( Random* random, const Noun& noun );
-
         unsigned int    priority;   // Priority in the sequence
         bool            pre;        // Whether or not it is before the noun
     };
@@ -47,31 +43,32 @@ namespace Syntax
             SUPERLATIVE
         };
     public:
+        std::string form( RandomGenerator& random, const WordChooser& words );
+
         Degree degree;
     };
     struct Quantitative : public Adjective
     {
+        std::string form( RandomGenerator& random, const WordChooser& words );
+
         unsigned int amount;
     };
     struct Demonstrative : public Adjective
     {
+        std::string form( RandomGenerator& random, const WordChooser& words );
+
         bool plural;
     };
 
     // A complete subject/object
     struct Noun : public Element
     {
-    public:
-        typedef std::unique_ptr<Noun> Type;
-    public:
-        static Type create();
-
         Person  person;
         bool    plural;
     };
     struct Pronoun : public Noun
     {
-        std::string generate();
+        std::string form( WordChooser& words );
     };
     struct NounWord : public Noun
     {
@@ -84,24 +81,14 @@ namespace Syntax
             INDEFINITE
         };   
     public:
-        static NounPhrase               construct( RandomGenerator* generator );
+        std::string form( WordChooser& words );
 
-        std::string                     generate();
-
-        std::vector<Adjective::Type>    adjectivePhrases;
         Premodifier                     premodifier;
-    };
-
-    struct Qualitative : public Adjective
-    {
-        Noun::Type noun;
     };
 
     struct Verb : public Element
     {
     public:
-        typedef std::unique_ptr<Verb> Type;
-
         enum class Conjugation
         {
             PRESENT,
@@ -113,7 +100,7 @@ namespace Syntax
         };
 
     public:
-        static Verb     construct( RandomGenerator* generator, const Noun& noun );
+        std::string form( WordChooser& words );
 
         Conjugation     conjugation;
 
@@ -132,5 +119,40 @@ namespace Syntax
     struct Adverb : public Element
     {
         // TODO:
+    };
+
+    struct NounPhrase : public Element
+    {
+        std::string form( WordChooser& words );
+
+        Synt<Noun>                      noun;
+        std::vector<Synt<Adjective>>    adjectives;
+    };
+
+    // A verb with any number of adverbs attached
+    struct VerbPhrase
+    {
+        std::string form( WordChooser& words );
+
+        Synt<Verb>                  verb;
+        std::vector<Synt<Adverb>>   adverbs;
+    };
+    // A possessive adjective is one which adds an owner (such as father's in father's car)
+    struct Possessive : public Adjective
+    {
+        std::string form( WordChooser& words );
+
+        Synt<NounPhrase> noun;
+    };
+    
+    struct IndependentClause : public Element
+    {
+        std::string form( WordChooser& words );
+
+        Synt<NounPhrase> subject;
+        Synt<VerbPhrase> action;
+
+        // Optional, only if action is transitive
+        Synt<NounPhrase> object;
     };
 }

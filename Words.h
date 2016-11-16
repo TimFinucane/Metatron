@@ -2,7 +2,7 @@
 
 #include <istream>
 #include "RandomGenerator.h"
-#include "WordGenerator.h"
+#include "WordChooser.h"
 
 namespace Syntax
 {
@@ -34,7 +34,7 @@ namespace Syntax
         std::vector<std::string> _words;
     };
 
-    class Words : public WordGenerator
+    class Words : public WordChooser
     {
     public:
         Words( std::istream& adjectives, std::istream& nouns, std::istream& verbs );
