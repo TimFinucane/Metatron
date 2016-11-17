@@ -2,7 +2,6 @@
 #include <iostream>
 #include <time.h>
 
-#include "Sentence.h"
 #include "Random.h"
 #include "Words.h"
 

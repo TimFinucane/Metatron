@@ -13,10 +13,13 @@ namespace Syntax
     // TODO: Pronouns in non-possessives
     // TODO: Dynamics in verbs
 
-    template <typename T>
-    using Synt = std::unique_ptr<T>;
+    struct Noun;
+	struct NounPhrase;
 
-    struct Element
+    template <typename T>
+    using Element = std::unique_ptr<T>;
+
+    struct SyntacticalElement
     {
     public:
         virtual std::string form( RandomGenerator& random, const WordChooser& words ) = 0;
@@ -29,7 +32,7 @@ namespace Syntax
         THIRD
     };
 
-    struct Adjective : public Element
+    struct Adjective : public SyntacticalElement
     {
         unsigned int    priority;   // Priority in the sequence
         bool            pre;        // Whether or not it is before the noun
@@ -53,40 +56,31 @@ namespace Syntax
 
         unsigned int amount;
     };
-    struct Demonstrative : public Adjective
-    {
-        std::string form( RandomGenerator& random, const WordChooser& words );
+	// A possessive adjective is one which adds an owner (such as father's in father's car)
+	struct Possessive : public Adjective
+	{
+		std::string form( RandomGenerator& random, const WordChooser& words );
 
-        bool plural;
-    };
+		Element<NounPhrase>	noun;
+	};
 
     // A complete subject/object
-    struct Noun : public Element
+    struct Noun : public SyntacticalElement
     {
         Person  person;
         bool    plural;
     };
     struct Pronoun : public Noun
     {
-        std::string form( WordChooser& words );
+        std::string form( RandomGenerator& random, const WordChooser& words );
     };
     struct NounWord : public Noun
     {
     public:
-        // A premodifier is either an article, a possessive, or a demonstrative
-        enum class Premodifier
-        {
-            NONE,
-            DEFINITE,
-            INDEFINITE
-        };   
-    public:
-        std::string form( WordChooser& words );
-
-        Premodifier                     premodifier;
+        std::string form( RandomGenerator& random, const WordChooser& words );
     };
 
-    struct Verb : public Element
+    struct Verb : public SyntacticalElement
     {
     public:
         enum class Conjugation
@@ -100,7 +94,9 @@ namespace Syntax
         };
 
     public:
-        std::string form( WordChooser& words );
+        std::string form( RandomGenerator& random, const WordChooser& words );
+
+		Noun&			subject;
 
         Conjugation     conjugation;
 
@@ -108,51 +104,55 @@ namespace Syntax
         bool            active; // Switches the subject and object I warned/I was warned.
         bool            subjunctive; // Has a may
 
-        bool            plural;
-        Person          person;
-
-        bool            transitive; // Has an object 
+        bool            transitive; // Has an object
 
         bool            dynamic; // The ing ending TODO IMPLEMENT
     };
 
-    struct Adverb : public Element
+    struct Adverb : public SyntacticalElement
     {
         // TODO:
     };
 
-    struct NounPhrase : public Element
+    struct NounPhrase : public SyntacticalElement
     {
-        std::string form( WordChooser& words );
+	public:
+		// A premodifier is either an article, a possessive, or a demonstrative
+		enum class Premodifier
+		{
+			NONE,
+			DEFINITE,
+			INDEFINITE
+		};
+	public:
+        std::string form( RandomGenerator& random, const WordChooser& words );
 
-        Synt<Noun>                      noun;
-        std::vector<Synt<Adjective>>    adjectives;
+		bool							demonstrative;
+		Premodifier                     premodifier;
+		Element<Noun>					noun;
+        std::vector<Element<Adjective>>	adjectives;
+
+	private:
+		std::string formDemonstrative( RandomGenerator& random );
     };
 
     // A verb with any number of adverbs attached
-    struct VerbPhrase
+    /*struct VerbPhrase
     {
-        std::string form( WordChooser& words );
+        std::string form( RandomGenerator& random, const WordChooser& words );
 
         Synt<Verb>                  verb;
         std::vector<Synt<Adverb>>   adverbs;
-    };
-    // A possessive adjective is one which adds an owner (such as father's in father's car)
-    struct Possessive : public Adjective
-    {
-        std::string form( WordChooser& words );
-
-        Synt<NounPhrase> noun;
-    };
+    };*/
     
-    struct IndependentClause : public Element
+    struct IndependentClause : public SyntacticalElement
     {
-        std::string form( WordChooser& words );
+        std::string form( RandomGenerator& random, const WordChooser& words );
 
-        Synt<NounPhrase> subject;
-        Synt<VerbPhrase> action;
+		Element<NounPhrase>	subject;
+		Element<Verb>		action;
 
         // Optional, only if action is transitive
-        Synt<NounPhrase> object;
+		Element<NounPhrase>	object;
     };
 }

@@ -19,6 +19,9 @@
     <ClInclude Include="WordChooser.h">
       <Filter>Syntax</Filter>
     </ClInclude>
+    <ClInclude Include="Generation.h">
+      <Filter>Syntax</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Helper">
