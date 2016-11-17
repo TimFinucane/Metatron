@@ -1,7 +1,6 @@
 explode
 implode
-shriek
-caress
+see
 espry
 slap
 rotate
