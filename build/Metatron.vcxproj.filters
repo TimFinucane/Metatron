@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\src\main.cpp" />
+    <ClCompile Include="..\src\syntax\Syntax.cpp">
+      <Filter>syntax</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="generation">
+      <UniqueIdentifier>{e61e1c26-5f76-43a8-9e57-938ae89c960c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="syntax">
+      <UniqueIdentifier>{8272d2fa-7705-4753-857e-d8d1cdef07a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util">
+      <UniqueIdentifier>{485a3829-c625-40d4-9115-0adabf4e59ed}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\generation\Generation.h">
+      <Filter>generation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\syntax\Syntax.h">
+      <Filter>syntax</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
