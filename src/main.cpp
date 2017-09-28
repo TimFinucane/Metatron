@@ -11,7 +11,7 @@ const unsigned int ARTICLE = 5;
 
 int main( int argc, char* argv[] )
 {
-    SyntaxFormer former;
+    Syntax::Former former;
 
     former.addSymbol( SENTENCE, 0, false );
     former.addSymbol( VERB, 0, true );
@@ -20,13 +20,13 @@ int main( int argc, char* argv[] )
     former.addSymbol( NOUN_PHRASE, 0, false );
     former.addSymbol( ARTICLE, 0, true );
 
-    SyntaxFormer::Production production;
+    Syntax::Production production;
     // Sentence A
     production.add( NOUN_PHRASE, {} );
     production.add( VERB, {} );
 
     former.addProduction( SENTENCE, std::move( production ) );
-    production = SyntaxFormer::Production();
+    production = Syntax::Production();
 
     // Sentence B
     production.add( ARTICLE, {} );
@@ -34,20 +34,20 @@ int main( int argc, char* argv[] )
     production.add( VERB, {} );
 
     former.addProduction( SENTENCE, std::move( production ) );
-    production = SyntaxFormer::Production();
+    production = Syntax::Production();
 
     // Noun phrase A
     production.add( ADJECTIVE, {} );
     production.add( NOUN_PHRASE, {} );
     
     former.addProduction( NOUN_PHRASE, std::move( production ) );
-    production = SyntaxFormer::Production();
+    production = Syntax::Production();
 
     // Noun phrase B
     production.add( NOUN, {} );
 
     former.addProduction( NOUN_PHRASE, std::move( production ) );
-    production = SyntaxFormer::Production();
+    production = Syntax::Production();
 
     for( auto symbol : former.generate( SENTENCE ) )
     {

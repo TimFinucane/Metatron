@@ -4,8 +4,10 @@
 
 static std::default_random_engine engine;
 
+using namespace Syntax;
+
 // Generates a series of terminals from a starting symbol
-std::list<SyntaxFormer::OutSymbol>  SyntaxFormer::generate( unsigned int symbol )
+std::list<Former::OutSymbol>  Former::generate( unsigned int symbol )
 {
     std::list<OutSymbol>  output{ { symbol, std::vector<unsigned int>( symbols[symbol].argumentCount, 0 ) } };
 
