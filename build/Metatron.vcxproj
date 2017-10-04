@@ -20,11 +20,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp" />
-    <ClCompile Include="..\src\syntax\SyntaxFormer.cpp" />
+    <ClCompile Include="..\src\syntax\Grammar.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\generation\Generation.h" />
-    <ClInclude Include="..\src\syntax\SyntaxFormer.h" />
+    <ClInclude Include="..\src\syntax\Grammar.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{694DEE4C-FA7C-460B-A333-13F51330DA44}</ProjectGuid>

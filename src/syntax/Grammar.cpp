@@ -1,10 +1,10 @@
-#include "SyntaxFormer.h"
+#include "Grammar.h"
 
 #include <random>
 
 static std::default_random_engine engine;
 
-using namespace Syntax;
+using namespace Grammar;
 
 // Generates a series of terminals from a starting symbol
 std::list<Former::OutSymbol>  Former::generate( unsigned int symbol )

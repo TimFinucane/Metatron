@@ -4,7 +4,7 @@
 #include <list>
 #include <map>
 
-namespace Syntax
+namespace Grammar
 {
     struct Production
     {

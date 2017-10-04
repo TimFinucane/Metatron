@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "syntax/SyntaxFormer.h"
+#include "syntax/Grammar.h"
 
 const unsigned int SENTENCE = 0;
 const unsigned int VERB = 1;
@@ -11,7 +11,7 @@ const unsigned int ARTICLE = 5;
 
 int main( int argc, char* argv[] )
 {
-    Syntax::Former former;
+    Grammar::Former former;
 
     former.addSymbol( SENTENCE, 0, false );
     former.addSymbol( VERB, 0, true );
@@ -20,13 +20,13 @@ int main( int argc, char* argv[] )
     former.addSymbol( NOUN_PHRASE, 0, false );
     former.addSymbol( ARTICLE, 0, true );
 
-    Syntax::Production production;
+    Grammar::Production production;
     // Sentence A
     production.add( NOUN_PHRASE, {} );
     production.add( VERB, {} );
 
     former.addProduction( SENTENCE, std::move( production ) );
-    production = Syntax::Production();
+    production = Grammar::Production();
 
     // Sentence B
     production.add( ARTICLE, {} );
@@ -34,20 +34,20 @@ int main( int argc, char* argv[] )
     production.add( VERB, {} );
 
     former.addProduction( SENTENCE, std::move( production ) );
-    production = Syntax::Production();
+    production = Grammar::Production();
 
     // Noun phrase A
     production.add( ADJECTIVE, {} );
     production.add( NOUN_PHRASE, {} );
     
     former.addProduction( NOUN_PHRASE, std::move( production ) );
-    production = Syntax::Production();
+    production = Grammar::Production();
 
     // Noun phrase B
     production.add( NOUN, {} );
 
     former.addProduction( NOUN_PHRASE, std::move( production ) );
-    production = Syntax::Production();
+    production = Grammar::Production();
 
     for( auto symbol : former.generate( SENTENCE ) )
     {
