@@ -1,6 +1,7 @@
 #include "Grammar.h"
 
 #include <random>
+#include <chrono>
 
 using namespace Grammar;
 
@@ -8,7 +9,7 @@ using namespace Grammar;
 template <typename Iterator>
 Iterator    chooseFromRange( std::pair<Iterator, Iterator> range )
 {
-    static std::default_random_engine engine;
+    static std::default_random_engine engine( std::chrono::high_resolution_clock::now().time_since_epoch().count() );
 
     std::uniform_int<> uniform( 0, (int)std::distance( range.first, range.second ) - 1 );
 
@@ -16,9 +17,9 @@ Iterator    chooseFromRange( std::pair<Iterator, Iterator> range )
 }
 
 // Generates a series of terminals from a starting symbol
-String      Former::generate( unsigned int symbol )
+String      Former::generate( unsigned int head )
 {
-    String  string;
+    String  string( head );
 
     // Will only exit once no more symbols have been converted
     auto symbolIt = string.symbols().begin();
