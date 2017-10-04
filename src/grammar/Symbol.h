@@ -4,6 +4,8 @@
 
 namespace Grammar
 {
+    struct Symbol;
+
     /*
      * A Link joins two symbols together, with a linkType defines
      *  to the user why they are joined together.
@@ -32,6 +34,11 @@ namespace Grammar
      */
     struct Symbol
     {
+        Symbol( unsigned int id )
+            : id( id )
+        {
+        }
+
         unsigned int        id;
 
         // These links will exist as long as the Grammar::Former has not been refreshed
