@@ -21,9 +21,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\src\generation\Generation.h">
-      <Filter>generation</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\grammar\Grammar.h">
       <Filter>grammar</Filter>
     </ClInclude>
@@ -35,6 +32,9 @@
     </ClInclude>
     <ClInclude Include="..\src\grammar\String.h">
       <Filter>grammar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\generation\Word.h">
+      <Filter>generation</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
