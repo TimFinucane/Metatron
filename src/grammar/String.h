@@ -13,40 +13,18 @@ namespace Grammar
     struct String
     {
     public:
-        void    addLink( unsigned int linkType, const Symbol* first, const Symbol* second )
-        {
-            linkList.push_back( { linkType, first, second } );
-            first->links.push_back( &linkList.back() );
-            second->links.push_back( &linkList.back() );
-        }
-        void    removeLink( Link* link )
-        {
-            auto it = std::find_if( linkList.begin(), linkList.end(), [link]( const Link& element ){ return link == &element; } );
-
-            if( it != linkList.end() )
-                removeLink( it );
-        }
-        void    removeLink( std::list<Link>::iterator it )
-        {
-            std::vector<Link*> linkVector = it->first->links;
-            linkVector.erase( std::find( linkVector.begin(), linkVector.end(), &*it ) );
-
-            linkVector = it->second->links;
-            linkVector.erase( std::find( linkVector.begin(), linkVector.end(), &*it ) );
-
-            linkList.erase( it );
-        }
+        void    addLink( unsigned int linkType, const Symbol* first, const Symbol* second );
+        void    removeLink( Link* link );
+        void    removeLink( std::list<Link>::iterator it );
         void    removeLinks( std::list<Link>::iterator begin, std::list<Link>::iterator end )
         {
             for( auto it = begin; it != end; ++it )
-            {
                 removeLink( it );
-            }
         }
 
-        void    addSymbol( std::list<Symbol>::const_iterator it, Symbol& symbol )
+        void    addSymbol( std::list<Symbol>::const_iterator it, unsigned int id )
         {
-            symbolList.insert( it, symbol );
+            symbolList.insert( it, id );
         }
         template <typename Iterator>
         void    addSymbols( std::list<Symbol>::const_iterator it, Iterator first, Iterator last )

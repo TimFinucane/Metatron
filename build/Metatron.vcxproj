@@ -20,12 +20,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\grammar\Grammar.cpp" />
+    <ClCompile Include="..\src\grammar\String.cpp" />
     <ClCompile Include="..\src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\generation\Generation.h" />
     <ClInclude Include="..\src\grammar\Grammar.h" />
     <ClInclude Include="..\src\grammar\Production.h" />
+    <ClInclude Include="..\src\grammar\String.h" />
     <ClInclude Include="..\src\grammar\Symbol.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

@@ -5,6 +5,9 @@
     <ClCompile Include="..\src\grammar\Grammar.cpp">
       <Filter>grammar</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\grammar\String.cpp">
+      <Filter>grammar</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="generation">
@@ -28,6 +31,9 @@
       <Filter>grammar</Filter>
     </ClInclude>
     <ClInclude Include="..\src\grammar\Symbol.h">
+      <Filter>grammar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\grammar\String.h">
       <Filter>grammar</Filter>
     </ClInclude>
   </ItemGroup>
