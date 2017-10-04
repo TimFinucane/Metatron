@@ -10,9 +10,9 @@ Iterator    chooseFromRange( std::pair<Iterator, Iterator> range )
 {
     static std::default_random_engine engine;
 
-    std::uniform_int<> uniform( 0, (int)std::distance( productionRange.first, productionRange.second ) - 1 );
+    std::uniform_int<> uniform( 0, (int)std::distance( range.first, range.second ) - 1 );
 
-    return std::next( productionRange.first, uniform( engine ) );
+    return std::next( range.first, uniform( engine ) );
 }
 
 // Generates a series of terminals from a starting symbol
@@ -35,7 +35,7 @@ String      Former::generate( unsigned int symbol )
             // Now apply the production
 
             // Add symbols
-            string.symbols.insert( symbolIt, production.symbols.begin(), production.symbols.end() );
+            string.addSymbols( symbolIt, production.symbols.begin(), production.symbols.end() );
 
             // Add internal links
             for( const Production::InternalLink& linkInfo : production.internalLinks )
