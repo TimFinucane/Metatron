@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "syntax/Grammar.h"
+#include "grammar/Grammar.h"
 
 const unsigned int SENTENCE = 0;
 const unsigned int VERB = 1;
