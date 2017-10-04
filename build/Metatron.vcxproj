@@ -25,6 +25,7 @@
   <ItemGroup>
     <ClInclude Include="..\src\generation\Generation.h" />
     <ClInclude Include="..\src\grammar\Grammar.h" />
+    <ClInclude Include="..\src\grammar\Production.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{694DEE4C-FA7C-460B-A333-13F51330DA44}</ProjectGuid>

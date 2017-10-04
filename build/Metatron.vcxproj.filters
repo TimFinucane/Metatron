@@ -24,5 +24,8 @@
     <ClInclude Include="..\src\grammar\Grammar.h">
       <Filter>grammar</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\grammar\Production.h">
+      <Filter>grammar</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
