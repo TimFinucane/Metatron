@@ -43,6 +43,12 @@ namespace Grammar
             unsigned int secondIndex;
         };
     public:
+        Production() {}
+        Production( std::vector<unsigned int>&& symbols )
+            : symbols( std::move( symbols ) )
+        {
+        }
+
         void    addSymbol( unsigned int symbol )
         {
             symbols.push_back( symbol );
