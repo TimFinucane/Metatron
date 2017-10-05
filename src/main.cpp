@@ -2,6 +2,12 @@
 #include <string>
 
 #include "grammar/Grammar.h"
+#include "generation/Generation.h"
+
+#include "generation/words/Noun.h"
+#include "generation/words/Verb.h"
+#include "generation/words/Adjective.h"
+#include "generation/words/Article.h"
 
 enum SymbolType : unsigned int
 {
@@ -38,11 +44,13 @@ int main( int argc, char* argv[] )
 
     String output = former.generate( SENTENCE );
 
-    for( const Symbol& symbol : output.symbols() )
-    {
-        std::cout << names[symbol.id] << " ";
-    }
-    std::cout << std::endl;
+    Generation::Translator translator;
+    translator.addWord( VERB, Generation::Words::Verb() );
+    translator.addWord( NOUN, Generation::Words::Noun() );
+    translator.addWord( ADJECTIVE, Generation::Words::Adjective() );
+    translator.addWord( ARTICLE, Generation::Words::Article() );
+
+    std::cout << translator.transform( output ) << std::endl;
 
     char c;
     std::cin >> c;

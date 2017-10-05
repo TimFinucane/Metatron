@@ -19,6 +19,9 @@
     <Filter Include="grammar">
       <UniqueIdentifier>{8272d2fa-7705-4753-857e-d8d1cdef07a7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="generation\words">
+      <UniqueIdentifier>{fa585331-6183-4536-b7ce-4861aca79157}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\grammar\Grammar.h">
@@ -38,6 +41,18 @@
     </ClInclude>
     <ClInclude Include="..\src\generation\Generation.h">
       <Filter>generation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\generation\words\Noun.h">
+      <Filter>generation\words</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\generation\words\Verb.h">
+      <Filter>generation\words</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\generation\words\Adjective.h">
+      <Filter>generation\words</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\generation\words\Article.h">
+      <Filter>generation\words</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

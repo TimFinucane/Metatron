@@ -26,6 +26,10 @@
   <ItemGroup>
     <ClInclude Include="..\src\generation\Generation.h" />
     <ClInclude Include="..\src\generation\Word.h" />
+    <ClInclude Include="..\src\generation\words\Adjective.h" />
+    <ClInclude Include="..\src\generation\words\Article.h" />
+    <ClInclude Include="..\src\generation\words\Noun.h" />
+    <ClInclude Include="..\src\generation\words\Verb.h" />
     <ClInclude Include="..\src\grammar\Grammar.h" />
     <ClInclude Include="..\src\grammar\Production.h" />
     <ClInclude Include="..\src\grammar\String.h" />
