@@ -2,7 +2,7 @@
 
 #include <grammar/Symbol.h>
 
-namespace Generator
+namespace Generation
 {
     /*
      * Defines a terminal symbol that can generate
@@ -13,6 +13,6 @@ namespace Generator
     public:
         virtual ~Word() = default;
 
-        virtual std::string generate( Grammar::Symbol* symbol ) = 0;
+        virtual std::string generate( const Grammar::Symbol* symbol ) = 0;
     };
 }

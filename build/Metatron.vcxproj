@@ -24,6 +24,7 @@
     <ClCompile Include="..\src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\src\generation\Generation.h" />
     <ClInclude Include="..\src\generation\Word.h" />
     <ClInclude Include="..\src\grammar\Grammar.h" />
     <ClInclude Include="..\src\grammar\Production.h" />

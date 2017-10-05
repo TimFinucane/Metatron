@@ -36,5 +36,8 @@
     <ClInclude Include="..\src\generation\Word.h">
       <Filter>generation</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\generation\Generation.h">
+      <Filter>generation</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
