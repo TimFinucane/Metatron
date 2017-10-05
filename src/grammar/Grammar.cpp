@@ -9,7 +9,7 @@ using namespace Grammar;
 template <typename Iterator>
 Iterator    chooseFromRange( std::pair<Iterator, Iterator> range )
 {
-    static std::default_random_engine engine( std::chrono::high_resolution_clock::now().time_since_epoch().count() );
+    static std::default_random_engine engine( (int)std::chrono::high_resolution_clock::now().time_since_epoch().count() );
 
     std::uniform_int<> uniform( 0, (int)std::distance( range.first, range.second ) - 1 );
 

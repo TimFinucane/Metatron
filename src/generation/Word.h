@@ -27,15 +27,15 @@ namespace Generation
         bool            hasLink( unsigned int linkType )
         {
             return std::find_if( symbol->links.begin(), symbol->links.end(),
-                          [linkType]( const Grammar::Link& link ){ return link.type == linkType; }
+                          [linkType]( const Grammar::Link* link ){ return link->type == linkType; }
             ) != symbol->links.end();
         }
         bool            hasLink( unsigned int linkType, unsigned int symbolType )
         {
             return std::find_if( symbol->links.begin(), symbol->links.end(),
-                [&]( const Grammar::Link& link )
+                [&]( const Grammar::Link* link )
             {
-                return link.type == linkType && link.getOther( symbol )->id == symbolType;
+                return link->type == linkType && link->getOther( symbol )->id == symbolType;
             }
             ) != symbol->links.end();
         }
