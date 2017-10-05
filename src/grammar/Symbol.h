@@ -27,6 +27,11 @@ namespace Grammar
         {
             return first == item ? first : second;
         }
+
+        const Symbol*   getOther( const Symbol* item ) const
+        {
+            return first == item ? second : first;
+        }
     };
 
     /*
