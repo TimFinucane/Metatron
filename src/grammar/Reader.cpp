@@ -90,14 +90,14 @@ unsigned int    Reader::getSymbol( const std::string& name )
 }
 unsigned int    Reader::getLink( const std::string& name )
 {
-    auto it = mapping.symbols.upper_bound( name );
-    if( it != mapping.symbols.begin() && std::prev( it )->first == name )
+    auto it = mapping.links.upper_bound( name );
+    if( it != mapping.links.begin() && std::prev( it )->first == name )
         return std::prev( it )->second;
     else
     {
-        unsigned int index = (unsigned int)mapping.symbols.size();
+        unsigned int index = (unsigned int)mapping.links.size();
 
-        mapping.symbols.insert( it, { name, index } );
+        mapping.links.insert( it, { name, index } );
         return index;
     }
 }
