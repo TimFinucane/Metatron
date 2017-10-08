@@ -11,7 +11,10 @@ namespace Generation
         protected:
             std::string produceText()
             {
-                return "dog";
+                if( hasLink( "has_article" ) )
+                    return "dog";
+                else
+                    return "George";
             }
         };
     }
