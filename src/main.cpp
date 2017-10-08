@@ -4,6 +4,8 @@
 #include "grammar/Grammar.h"
 #include "generation/Generation.h"
 
+#include "grammar/Reader.h"
+
 #include "generation/words/Noun.h"
 #include "generation/words/Verb.h"
 #include "generation/words/Adjective.h"
@@ -28,30 +30,34 @@ std::map<unsigned int, std::string> names
     { ARTICLE, "article" }
 };
 
+#include <regex>
+
 int main( int argc, char* argv[] )
 {
-    using namespace Grammar;
+    Grammar::Former former;
 
-    Former former;
+    Grammar::Reader reader( former );
 
-    former.addProduction( SENTENCE, Production( { NOUN_PHRASE, VERB } ) );
-    former.addProduction( SENTENCE, Production( { NOUN_PHRASE, VERB, NOUN_PHRASE } ) );
-    former.addProduction( NOUN_PHRASE, Production( { ARTICLE, ADJECTIVE_SEQUENCE, NOUN } ) );
-    former.addProduction( NOUN_PHRASE, Production( { ADJECTIVE_SEQUENCE, NOUN } ) );
-    former.addProduction( NOUN_PHRASE, Production( { NOUN } ) );
-    former.addProduction( ADJECTIVE_SEQUENCE, Production( { ADJECTIVE } ) );
-    former.addProduction( ADJECTIVE_SEQUENCE, Production( { ADJECTIVE, ADJECTIVE_SEQUENCE } ) );
+    reader.read( "Sentence -> NounPhrase Verb" );
+    reader.read( "Sentence -> NounPhrase Verb NounPhrase" );
+    reader.read( "NounPhrase -> Article AdjectiveSequence Noun" );
+    reader.read( "NounPhrase -> AdjectiveSequence Noun" );
+    reader.read( "NounPhrase -> Noun" );
+    reader.read( "AdjectiveSequence -> Adjective AdjectiveSequence" );
+    reader.read( "AdjectiveSequence -> Adjective" );
 
-    String output = former.generate( SENTENCE );
+    Grammar::String output = former.generate( SENTENCE );
 
+    // Form words from symbols
     Generation::Translator translator;
-    translator.addWord( VERB, Generation::Words::Verb() );
-    translator.addWord( NOUN, Generation::Words::Noun() );
-    translator.addWord( ADJECTIVE, Generation::Words::Adjective() );
-    translator.addWord( ARTICLE, Generation::Words::Article() );
+    translator.addWord( reader.symbol( "Verb" ),        Generation::Words::Verb() );
+    translator.addWord( reader.symbol( "Noun" ),        Generation::Words::Noun() );
+    translator.addWord( reader.symbol( "Adjective" ),   Generation::Words::Adjective() );
+    translator.addWord( reader.symbol( "Article" ),     Generation::Words::Article() );
 
     std::cout << translator.transform( output ) << std::endl;
-
+    
+    // And silence
     char c;
     std::cin >> c;
 

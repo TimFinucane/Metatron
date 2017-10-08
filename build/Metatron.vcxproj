@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\grammar\Grammar.cpp" />
+    <ClCompile Include="..\src\grammar\Reader.cpp" />
     <ClCompile Include="..\src\grammar\String.cpp" />
     <ClCompile Include="..\src\main.cpp" />
   </ItemGroup>
@@ -32,6 +33,7 @@
     <ClInclude Include="..\src\generation\words\Verb.h" />
     <ClInclude Include="..\src\grammar\Grammar.h" />
     <ClInclude Include="..\src\grammar\Production.h" />
+    <ClInclude Include="..\src\grammar\Reader.h" />
     <ClInclude Include="..\src\grammar\String.h" />
     <ClInclude Include="..\src\grammar\Symbol.h" />
   </ItemGroup>
@@ -107,6 +109,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -131,6 +134,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>

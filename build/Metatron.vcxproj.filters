@@ -8,6 +8,9 @@
     <ClCompile Include="..\src\grammar\String.cpp">
       <Filter>grammar</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\grammar\Reader.cpp">
+      <Filter>grammar</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="generation">
@@ -53,6 +56,9 @@
     </ClInclude>
     <ClInclude Include="..\src\generation\words\Article.h">
       <Filter>generation\words</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\grammar\Reader.h">
+      <Filter>grammar</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
