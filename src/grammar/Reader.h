@@ -5,6 +5,7 @@
 #include <istream>
 #include <fstream>
 
+#include <Mapping.h>
 #include "Grammar.h"
 
 namespace Grammar
@@ -27,12 +28,17 @@ namespace Grammar
         {
             return symbolNames[name];
         }
+        unsigned int link( const std::string& name )
+        {
+            return linkTypes[name];
+        }
 
+        Mapping     mapping;
     protected:
-        unsigned int    getUniqueId( const std::string& name );
+        unsigned int    getSymbol( const std::string& name );
+        unsigned int    getLink( const std::string& name );
 
     private:
         Former& former;
-        std::map<std::string, unsigned int>     symbolNames;
     };
 }

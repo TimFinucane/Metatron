@@ -30,7 +30,7 @@ void            Reader::read( const std::string& file )
         iterator += results.length();
 
         // If there is an arrow, we are at a head and can push back previous symbol
-        if( results.size() == 4 && results[3].compare( "->" ) == 0 )
+        if( results[3].compare( "->" ) == 0 )
         {
             if( production.size() > 0 )
             {
@@ -39,16 +39,16 @@ void            Reader::read( const std::string& file )
             }
 
             // Replace head
-            head = getUniqueId( results[1].str() );
+            head = getSymbol( results[1].str() );
 
             // TODO: And here we would process the external link requirements
         }
         else // Add a symbol
         {
-            production.addSymbol( getUniqueId( results[1].str() ) );
+            production.addSymbol( getSymbol( results[1].str() ) );
 
             // Go through links
-            if( results.size() == 3 && !results[2].str().empty() )
+            if( results[2].matched )
             {
                 unsigned int thisIndex = production.size() - 1;
 
@@ -57,7 +57,8 @@ void            Reader::read( const std::string& file )
                 auto argIt = args.begin();
                 while( argIt < args.end() )
                 {
-                    std::regex_match( argIt, args.end(), results, arg, std::regex_constants::match_continuous );
+                    std::regex_search( argIt, args.end(), results, arg, std::regex_constants::match_continuous );
+                    argIt += results.length();
 
                     unsigned int otherIndex = std::stoi( results[1].str() );
                     unsigned int linkType = std::stoi( results[2].str() );
@@ -74,16 +75,29 @@ void            Reader::read( const std::string& file )
         production = Production();
     }
 }
-unsigned int    Reader::getUniqueId( const std::string& name )
+unsigned int    Reader::getSymbol( const std::string& name )
 {
-    auto it = symbolNames.upper_bound( name );
-    if( it != symbolNames.begin() && std::prev( it )->first == name )
+    auto it = mapping.symbols.upper_bound( name );
+    if( it != mapping.symbols.begin() && std::prev( it )->first == name )
         return std::prev( it )->second;
     else
     {
-        unsigned int index = (unsigned int)symbolNames.size();
+        unsigned int index = (unsigned int)mapping.symbols.size();
 
-        symbolNames.insert( it, { name, index } );
+        mapping.symbols.insert( it, { name, index } );
+        return index;
+    }
+}
+unsigned int    Reader::getLink( const std::string& name )
+{
+    auto it = mapping.symbols.upper_bound( name );
+    if( it != mapping.symbols.begin() && std::prev( it )->first == name )
+        return std::prev( it )->second;
+    else
+    {
+        unsigned int index = (unsigned int)mapping.symbols.size();
+
+        mapping.symbols.insert( it, { name, index } );
         return index;
     }
 }

@@ -36,6 +36,7 @@
     <ClInclude Include="..\src\grammar\Reader.h" />
     <ClInclude Include="..\src\grammar\String.h" />
     <ClInclude Include="..\src\grammar\Symbol.h" />
+    <ClInclude Include="..\src\Mapping.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{694DEE4C-FA7C-460B-A333-13F51330DA44}</ProjectGuid>
