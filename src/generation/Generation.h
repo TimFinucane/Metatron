@@ -3,6 +3,7 @@
 #include <map>
 #include <memory>
 
+#include <Mapping.h>
 #include <grammar/String.h>
 
 #include "Word.h"
@@ -12,12 +13,21 @@ namespace Generation
     class Translator
     {
     public:
-        template <typename WORD>
-        void    addWord( unsigned int symbol, WORD&& word )
+        Translator( Mapping& mapping )
+            : mapping( mapping )
         {
-            words[symbol] = std::make_unique<WORD>( word );
+
         }
-        
+
+        template <typename WordType>
+        void    addWord( const std::string& symbolName, WordType&& word )
+        {
+            unsigned int symbolId = mapping.symbols[symbolName];
+
+            words[symbolId] = std::make_unique<WordType>( std::move( word ) );
+            words[symbolId]->map( mapping );
+        }
+
         std::string transform( Grammar::String string )
         {
             std::string output = "";
@@ -31,6 +41,8 @@ namespace Generation
         }
 
     private:
-        std::map<unsigned int, std::unique_ptr<Word>> words;
+        Mapping&    mapping;
+
+        std::map<unsigned int, std::unique_ptr<Word>>   words;
     };
 }
