@@ -24,15 +24,6 @@ namespace Grammar
          */
         void    read( const std::string& file );
 
-        unsigned int symbol( const std::string& name )
-        {
-            return symbolNames[name];
-        }
-        unsigned int link( const std::string& name )
-        {
-            return linkTypes[name];
-        }
-
         Mapping     mapping;
     protected:
         unsigned int    getSymbol( const std::string& name );

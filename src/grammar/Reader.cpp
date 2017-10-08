@@ -14,7 +14,7 @@ void            Reader::read( const std::string& file )
     // HEADWITHSYMBOL(/3)
 
     std::regex symbol( R"(\s*(\w*)(?:\(([^\)]*)\))?\s*(->)?)" );
-    std::regex arg( R"(\s*(\d*)\/(\d*)\s*,?)" );
+    std::regex arg( R"(\s*(\d*)\/(\w*)\s*,?)" );
 
     auto iterator = file.begin();
 
@@ -61,7 +61,7 @@ void            Reader::read( const std::string& file )
                     argIt += results.length();
 
                     unsigned int otherIndex = std::stoi( results[1].str() );
-                    unsigned int linkType = std::stoi( results[2].str() );
+                    unsigned int linkType = getLink( results[2].str() );
 
                     production.addInternalLink( { linkType, thisIndex, otherIndex } );
                 }
