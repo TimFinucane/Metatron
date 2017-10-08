@@ -13,8 +13,8 @@ namespace Grammar
     class Reader
     {
     public:
-        Reader( Former& former )
-            : former( former )
+        Reader( Former& former, Mapping& mapping )
+            : former( former ), mapping( mapping )
         {
         }
 
@@ -24,12 +24,12 @@ namespace Grammar
          */
         void    read( const std::string& file );
 
-        Mapping     mapping;
     protected:
         unsigned int    getSymbol( const std::string& name );
         unsigned int    getLink( const std::string& name );
 
     private:
-        Former& former;
+        Former&     former;
+        Mapping&    mapping;
     };
 }

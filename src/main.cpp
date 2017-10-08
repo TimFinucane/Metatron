@@ -13,9 +13,11 @@
 
 int main( int argc, char* argv[] )
 {
+    Mapping mapping;
+
     Grammar::Former former;
 
-    Grammar::Reader reader( former );
+    Grammar::Reader reader( former, mapping );
 
     reader.read( "Sentence -> NounPhrase Verb" );
     reader.read( "Sentence -> NounPhrase Verb NounPhrase" );
@@ -25,16 +27,16 @@ int main( int argc, char* argv[] )
     reader.read( "AdjectiveSequence -> Adjective AdjectiveSequence" );
     reader.read( "AdjectiveSequence -> Adjective" );
 
-    Grammar::String output = former.generate( reader.mapping.symbols["Sentence"] );
+    Grammar::String output = former.generate( mapping.symbols["Sentence"] );
 
     // Form words from symbols
-    /*Generation::Translator translator;
-    translator.addWord( reader.symbol( "Verb" ),        Generation::Words::Verb() );
-    translator.addWord( reader.symbol( "Noun" ),        Generation::Words::Noun() );
-    translator.addWord( reader.symbol( "Adjective" ),   Generation::Words::Adjective() );
-    translator.addWord( reader.symbol( "Article" ),     Generation::Words::Article() );
+    Generation::Translator translator( mapping );
+    translator.addWord( "Verb",        Generation::Words::Verb() );
+    translator.addWord( "Noun",        Generation::Words::Noun() );
+    translator.addWord( "Adjective",   Generation::Words::Adjective() );
+    translator.addWord( "Article",     Generation::Words::Article() );
 
-    std::cout << translator.transform( output ) << std::endl;*/
+    std::cout << translator.transform( output ) << std::endl;
     
     // And silence
     char c;
