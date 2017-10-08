@@ -11,27 +11,6 @@
 #include "generation/words/Adjective.h"
 #include "generation/words/Article.h"
 
-enum SymbolType : unsigned int
-{
-    SENTENCE,
-    VERB,
-    ADJECTIVE,
-    NOUN,
-    NOUN_PHRASE,
-    ARTICLE,
-    ADJECTIVE_SEQUENCE
-};
-
-std::map<unsigned int, std::string> names
-{
-    { VERB, "verb" },
-    { ADJECTIVE, "adjective" },
-    { NOUN, "noun" },
-    { ARTICLE, "article" }
-};
-
-#include <regex>
-
 int main( int argc, char* argv[] )
 {
     Grammar::Former former;
@@ -46,7 +25,7 @@ int main( int argc, char* argv[] )
     reader.read( "AdjectiveSequence -> Adjective AdjectiveSequence" );
     reader.read( "AdjectiveSequence -> Adjective" );
 
-    Grammar::String output = former.generate( SENTENCE );
+    Grammar::String output = former.generate( reader.symbol( "Sentence" ) );
 
     // Form words from symbols
     Generation::Translator translator;
