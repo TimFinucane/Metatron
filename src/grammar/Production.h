@@ -62,6 +62,15 @@ namespace Grammar
             externalLinks.push_back( link );
         }
 
+        unsigned int    symbol( size_t index )
+        {
+            return symbols[index];
+        }
+        size_t          size()
+        {
+            return symbols.size();
+        }
+
     private:
         std::vector<unsigned int>   symbols;
         std::vector<InternalLink>   internalLinks;
