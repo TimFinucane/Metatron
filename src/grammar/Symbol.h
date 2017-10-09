@@ -4,41 +4,30 @@
 
 namespace Grammar
 {
-    struct Symbol;
-
     /*
-     * A Link joins two symbols together, with a linkType defines
-     *  to the user why they are joined together.
-     */
-    struct Link
-    {
-        // A generic type that allows you to say what kind of link
-        unsigned int type;
-
-        // The two symbols the link exists between
-        Symbol* first;
-        Symbol* second;
-
-        Symbol*& getOther( const Symbol* item )
-        {
-            return first == item ? second : first;
-        }
-        Symbol*& getThis( const Symbol* item )
-        {
-            return first == item ? first : second;
-        }
-
-        const Symbol*   getOther( const Symbol* item ) const
-        {
-            return first == item ? second : first;
-        }
-    };
-
-    /*
-     * Final output info about a symbol
+     * Output info about a symbol
      */
     struct Symbol
     {
+    public:
+        /*
+         * A Link informs a symbol about another symbol that
+         * is in some way related to it.
+         */
+        struct Link
+        {
+            // A generic type that allows you to say what kind of link
+            unsigned int    type;
+
+            Symbol*         other;
+
+            bool operator==( const Link& link )
+            {
+                return link.type == type && link.other == other;
+            }
+        };
+
+    public:
         Symbol( unsigned int id )
             : id( id )
         {
@@ -47,6 +36,6 @@ namespace Grammar
         unsigned int        id;
 
         // These links will exist as long as the Grammar::Former has not been refreshed
-        std::vector<Link*>  links;
+        std::vector<Link>  links;
     };
 }

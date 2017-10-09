@@ -50,7 +50,7 @@ void            Reader::read( const std::string& file )
             // Go through links
             if( results[2].matched )
             {
-                unsigned int thisIndex = production.size() - 1;
+                unsigned int thisIndex = (unsigned int)production.size() - 1;
 
                 const std::string args = results[2].str();
 

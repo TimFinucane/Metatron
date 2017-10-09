@@ -1,9 +1,9 @@
 #pragma once
 
 #include <map>
+#include <list>
 
 #include "Production.h"
-#include "String.h"
 
 namespace Grammar
 {
@@ -18,7 +18,7 @@ namespace Grammar
         }
 
         // Generates a series of terminals from a starting symbol
-        String  generate( unsigned int symbol );
+        std::list<Symbol>   generate( unsigned int symbol );
     private:
         std::multimap<unsigned int, Production>     productions;
     };

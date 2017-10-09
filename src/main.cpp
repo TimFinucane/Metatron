@@ -27,8 +27,6 @@ int main( int argc, char* argv[] )
     reader.read( "AdjectiveSequence -> Adjective AdjectiveSequence" );
     reader.read( "AdjectiveSequence -> Adjective" );
 
-    Grammar::String output = former.generate( mapping.symbols["Sentence"] );
-
     // Form words from symbols
     Generation::Translator translator( mapping );
     translator.addWord( "Verb",        Generation::Words::Verb() );
@@ -36,11 +34,10 @@ int main( int argc, char* argv[] )
     translator.addWord( "Adjective",   Generation::Words::Adjective() );
     translator.addWord( "Article",     Generation::Words::Article() );
 
-    std::cout << translator.transform( output ) << std::endl;
+    std::cout << translator.transform( former.generate( mapping.symbols["Sentence"] ) ) << std::endl;
     
     // And silence
-    char c;
-    std::cin >> c;
+    std::cin.get();
 
     return 0;
 }

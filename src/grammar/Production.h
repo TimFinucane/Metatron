@@ -29,7 +29,7 @@ namespace Grammar
 
             // The index to the symbol (from this production) that
             //  the link connects to.
-            unsigned int symbol;
+            unsigned int thisIndex;
         };
 
         /*
@@ -39,8 +39,8 @@ namespace Grammar
         {
             unsigned int type;
 
-            unsigned int firstIndex;
-            unsigned int secondIndex;
+            unsigned int thisIndex;
+            unsigned int otherIndex;
         };
     public:
         Production() {}

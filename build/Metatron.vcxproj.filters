@@ -5,9 +5,6 @@
     <ClCompile Include="..\src\grammar\Grammar.cpp">
       <Filter>grammar</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\grammar\String.cpp">
-      <Filter>grammar</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\grammar\Reader.cpp">
       <Filter>grammar</Filter>
     </ClCompile>
@@ -31,9 +28,6 @@
       <Filter>grammar</Filter>
     </ClInclude>
     <ClInclude Include="..\src\grammar\Symbol.h">
-      <Filter>grammar</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\grammar\String.h">
       <Filter>grammar</Filter>
     </ClInclude>
     <ClInclude Include="..\src\generation\Word.h">

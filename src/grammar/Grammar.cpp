@@ -16,14 +16,20 @@ Iterator    chooseFromRange( std::pair<Iterator, Iterator> range )
     return std::next( range.first, uniform( engine ) );
 }
 
-// Generates a series of terminals from a starting symbol
-String      Former::generate( unsigned int head )
+void        addLink( unsigned int linkType, Symbol* a, Symbol* b )
 {
-    String  string( head );
+    a->links.push_back( { linkType, b } );
+    b->links.push_back( { linkType, a } );
+}
+
+// Generates a series of terminals from a starting symbol
+std::list<Symbol>   Former::generate( unsigned int head )
+{
+    std::list<Symbol>  string{ Symbol( head ) };
 
     // Will only exit once no more symbols have been converted
-    auto symbolIt = string.symbols().begin();
-    while( symbolIt != string.symbols().end() )
+    auto symbolIt = string.begin();
+    while( symbolIt != string.end() )
     {
         // Choose a random production. TODO: Allow input chances?
         auto productionRange = productions.equal_range( symbolIt->id );
@@ -36,36 +42,38 @@ String      Former::generate( unsigned int head )
             // Now apply the production
 
             // Add symbols
-            string.addSymbols( symbolIt, production.symbols.begin(), production.symbols.end() );
+            string.insert( std::next( symbolIt ), production.symbols.begin(), production.symbols.end() );
 
             // Add internal links
             for( const Production::InternalLink& linkInfo : production.internalLinks )
             {
-                const Symbol* first = &*std::next( symbolIt, linkInfo.firstIndex + 1 );
-                const Symbol* second = &*std::next( symbolIt, linkInfo.secondIndex + 1 );
+                Symbol* us = &*std::next( symbolIt, linkInfo.thisIndex + 1 );
+                Symbol* them = &*std::next( symbolIt, linkInfo.otherIndex + 1 );
 
-                string.addLink( linkInfo.type, first, second );
+                addLink( linkInfo.type, us, them );
             }
 
             // Add external links
             for( const Production::ExternalLink& externalLinkInfo : production.externalLinks )
             {
-                // Go through links with current symbol, check if of type.
-                // TODO: Can speed up slightly by deleting links on the fly? Unless one link is used multiple times
-                for( const auto headLink : symbolIt->links )
+                // For every link that 
+                for( const auto linkInf : symbolIt->links )
                 {
-                    if( headLink->type == externalLinkInfo.originalType )
+                    if( linkInf.type == externalLinkInfo.originalType )
                     {
-                        const Symbol* first = headLink->getOther( &*symbolIt );
-                        const Symbol* second = &*std::next( symbolIt, externalLinkInfo.symbol );
+                        Symbol* us = &*std::next( symbolIt, externalLinkInfo.thisIndex + 1 );
+                        Symbol* them = linkInf.other;
 
-                        string.addLink( externalLinkInfo.newType, first, second );
+                        us->links.push_back( { externalLinkInfo.newType, them } );
+                        auto replaceLink = std::find( them->links.begin(), them->links.end(), Symbol::Link{ externalLinkInfo.originalType, &*symbolIt } );
+                        replaceLink->type = externalLinkInfo.newType;
+                        replaceLink->other = us;
                     }
                 }
             }
 
             // Now delete old symbol and continue
-            symbolIt = string.removeSymbol( symbolIt );
+            symbolIt = string.erase( symbolIt );
         }
         else
         {
