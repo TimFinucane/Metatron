@@ -24,8 +24,8 @@ int main( int argc, char* argv[] )
     reader.read( "NounPhrase -> Article AdjectiveSequence Noun(0/has_article)" );
     reader.read( "NounPhrase -> AdjectiveSequence Noun" );
     reader.read( "NounPhrase -> Noun" );
-    reader.read( "AdjectiveSequence -> Adjective AdjectiveSequence" );
-    reader.read( "AdjectiveSequence -> Adjective" );
+    reader.read( "AdjectiveSequence(/adjective) -> Adjective(/adjective) AdjectiveSequence(/adjective, 0/adjective)" );
+    reader.read( "AdjectiveSequence(/adjective) -> Adjective(/adjective)" );
 
     // Form words from symbols
     Generation::Translator translator( mapping );
