@@ -56,7 +56,6 @@ std::list<Symbol>   Former::generate( unsigned int head )
             // Add external links
             for( const Production::ExternalLink& externalLinkInfo : production.externalLinks )
             {
-                // For every link that 
                 for( const auto linkInf : symbolIt->links )
                 {
                     if( linkInf.type == externalLinkInfo.originalType )
@@ -64,15 +63,19 @@ std::list<Symbol>   Former::generate( unsigned int head )
                         Symbol* us = &*std::next( symbolIt, externalLinkInfo.thisIndex + 1 );
                         Symbol* them = linkInf.other;
 
-                        us->links.push_back( { externalLinkInfo.newType, them } );
-                        auto replaceLink = std::find( them->links.begin(), them->links.end(), Symbol::Link{ externalLinkInfo.originalType, &*symbolIt } );
-                        replaceLink->type = externalLinkInfo.newType;
-                        replaceLink->other = us;
+                        addLink( externalLinkInfo.newType, us, them );
                     }
                 }
             }
 
             // Now delete old symbol and continue
+            // Remove link references
+            for( auto linkInf : symbolIt->links )
+            {
+                auto& otherLinks = linkInf.other->links;
+                otherLinks.erase( std::find( otherLinks.begin(), otherLinks.end(), Symbol::Link{ linkInf.type, &*symbolIt } ) );
+            }
+
             symbolIt = string.erase( symbolIt );
         }
         else

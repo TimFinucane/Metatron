@@ -14,7 +14,7 @@ void            Reader::read( const std::string& file )
     // HEADWITHSYMBOL(/3)
 
     std::regex symbol( R"(\s*(\w*)(?:\(([^\)]*)\))?\s*(->)?)" );
-    std::regex arg( R"(\s*(\d*)\/(\w*)\s*,?)" );
+    std::regex arg( R"(\s*(\d*)\/(\w*)(?:\/(\w*))?\s*,?)" );
 
     auto iterator = file.begin();
 
@@ -60,10 +60,25 @@ void            Reader::read( const std::string& file )
                     std::regex_search( argIt, args.end(), results, arg, std::regex_constants::match_continuous );
                     argIt += results.length();
 
-                    unsigned int otherIndex = std::stoi( results[1].str() );
-                    unsigned int linkType = getLink( results[2].str() );
+                    if( results[1].compare("") ) // Internal
+                    {
+                        unsigned int otherIndex = std::stoi( results[1].str() );
+                        unsigned int linkType = getLink( results[2].str() );
 
-                    production.addInternalLink( { linkType, thisIndex, otherIndex } );
+                        production.addInternalLink( { linkType, thisIndex, otherIndex } );
+                    }
+                    else // External
+                    {
+                        unsigned int newType = getLink( results[2].str() );
+                        unsigned int originalType = 0;
+
+                        if( results[3].matched )
+                            originalType = getLink( results[3].str() );
+                        else
+                            originalType = newType;
+
+                        production.addExternalLink( { originalType, newType, thisIndex } );
+                    }
                 }
             }
         }
