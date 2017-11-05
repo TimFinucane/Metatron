@@ -29,10 +29,10 @@ int main( int argc, char* argv[] )
 
     // Form words from symbols
     Generation::Translator translator( mapping );
-    translator.addWord( "Verb",        Generation::Words::Verb() );
-    translator.addWord( "Noun",        Generation::Words::Noun() );
-    translator.addWord( "Adjective",   Generation::Words::Adjective() );
-    translator.addWord( "Article",     Generation::Words::Article() );
+    translator.addWord( "Verb",        Generation::Words::verb );
+    translator.addWord( "Noun",        Generation::Words::noun );
+    translator.addWord( "Adjective",   Generation::Words::adjective );
+    translator.addWord( "Article",     Generation::Words::article );
 
     std::cout << translator.transform( former.generate( mapping.symbols["Sentence"] ) ) << std::endl;
     

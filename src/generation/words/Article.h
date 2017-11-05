@@ -1,18 +1,11 @@
 #pragma once
 
-#include <generation/Word.h>
+#include <generation/WordPart.h>
 
-namespace Generation
+namespace Generation::Words
 {
-    namespace Words
+    std::string article( const WordPart& word )
     {
-        class Article : public Word
-        {
-        protected:
-            std::string produceText()
-            {
-                return "the";
-            }
-        };
+        return "the";
     }
 }

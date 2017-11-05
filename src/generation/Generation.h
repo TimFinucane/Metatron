@@ -2,29 +2,28 @@
 
 #include <map>
 #include <memory>
+#include <functional>
 
 #include "Mapping.h"
 #include "grammar/Symbol.h"
 
-#include "Word.h"
+#include "WordPart.h"
 
 namespace Generation
 {
     class Translator
     {
     public:
+        using WordGenerator = std::function<std::string( const WordPart& )>;
+    public:
         Translator( const Mapping& mapping )
             : mapping( mapping )
         {
         }
 
-        template <typename WordType>
-        void    addWord( const std::string& symbolName, WordType&& word )
+        void    addWord( const std::string& symbolName, const WordGenerator& word )
         {
-            unsigned int symbolId = mapping.symbols.find( symbolName )->second;
-
-            words[symbolId] = std::make_unique<WordType>( std::move( word ) );
-            words[symbolId]->map( mapping );
+            words.insert( { mapping.symbols.find( symbolName )->second, word } );
         }
 
         std::string transform( const std::list<Grammar::Symbol>& string )
@@ -32,7 +31,7 @@ namespace Generation
             std::string output = "";
 
             for( const auto& symbol : string )
-                output += words[symbol.id]->generate( &symbol ) + " ";
+                output += words[symbol.id]( WordPart( mapping, symbol ) ) + " ";
 
             output.back() = '.';
 
@@ -42,6 +41,6 @@ namespace Generation
     private:
         const Mapping&    mapping;
 
-        std::map<unsigned int, std::unique_ptr<Word>>   words;
+        std::map<unsigned int, WordGenerator>  words;
     };
 }

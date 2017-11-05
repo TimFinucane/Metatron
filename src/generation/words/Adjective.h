@@ -1,18 +1,11 @@
 #pragma once
 
-#include <generation/Word.h>
+#include <generation/WordPart.h>
 
-namespace Generation
+namespace Generation::Words
 {
-    namespace Words
+    std::string adjective( const WordPart& word )
     {
-        class Adjective : public Word
-        {
-        protected:
-            std::string produceText()
-            {
-                return "blue";
-            }
-        };
+        return "blue";
     }
 }

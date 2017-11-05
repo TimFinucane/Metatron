@@ -1,21 +1,14 @@
 #pragma once
 
-#include <generation/Word.h>
+#include <generation/WordPart.h>
 
-namespace Generation
+namespace Generation::Words
 {
-    namespace Words
+    std::string noun( const WordPart& word )
     {
-        class Noun : public Word
-        {
-        protected:
-            std::string produceText()
-            {
-                if( hasLink( "has_article" ) )
-                    return "dog";
-                else
-                    return "George";
-            }
-        };
+        if( word.hasLink( "has_article" ) )
+            return "dog";
+        else
+            return "George";
     }
 }

@@ -30,9 +30,6 @@
     <ClInclude Include="..\src\grammar\Symbol.h">
       <Filter>grammar</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\generation\Word.h">
-      <Filter>generation</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\generation\Generation.h">
       <Filter>generation</Filter>
     </ClInclude>
@@ -52,5 +49,8 @@
       <Filter>grammar</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Mapping.h" />
+    <ClInclude Include="..\src\generation\WordPart.h">
+      <Filter>generation</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
