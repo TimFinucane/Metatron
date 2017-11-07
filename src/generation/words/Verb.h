@@ -4,7 +4,7 @@
 
 namespace Generation::Words
 {
-    std::string verb( const WordPart& word )
+    std::string verb( const WordPart& )
     {
         return "ate";
     }

@@ -4,6 +4,9 @@
 
 namespace Grammar
 {
+    using SymbolType = unsigned int;
+    using LinkType = unsigned int;
+
     /*
      * Output info about a symbol
      */
@@ -16,15 +19,30 @@ namespace Grammar
          */
         struct Link
         {
-            // A generic type that allows you to say what kind of link
-            unsigned int    type;
+            Link( LinkType type, Symbol& symbol )
+                : type( type ), _other( &symbol )
+            {
+            }
 
-            Symbol*         other;
+            // A generic type that allows you to say what kind of link
+            LinkType    type;
+
+            Symbol&         other()
+            {
+                return *_other;
+            }
+            const Symbol&   other() const
+            {
+                return *_other;
+            }
 
             bool operator==( const Link& link )
             {
-                return link.type == type && link.other == other;
+                return link.type == type && link._other == _other;
             }
+
+        private:
+            Symbol*     _other; // Because references aren't reseatable they arent usable in a vector :(
         };
 
     public:
@@ -33,9 +51,8 @@ namespace Grammar
         {
         }
 
-        unsigned int        id;
+        SymbolType            id;
 
-        // These links will exist as long as the Grammar::Former has not been refreshed
-        std::vector<Link>  links;
+        std::vector<Link>   links;
     };
 }

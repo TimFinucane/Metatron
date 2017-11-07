@@ -5,17 +5,6 @@
 
 using namespace Grammar;
 
-// Chooses a random item from an iterator range, where the first iterator may be chosen but not the last
-template <typename Iterator>
-Iterator    chooseFromRange( std::pair<Iterator, Iterator> range )
-{
-    static std::default_random_engine engine( (int)std::chrono::high_resolution_clock::now().time_since_epoch().count() );
-
-    std::uniform_int<> uniform( 0, (int)std::distance( range.first, range.second ) - 1 );
-
-    return std::next( range.first, uniform( engine ) );
-}
-
 void        addLink( unsigned int linkType, Symbol* a, Symbol* b )
 {
     a->links.push_back( { linkType, b } );

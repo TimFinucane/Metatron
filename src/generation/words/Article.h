@@ -4,7 +4,7 @@
 
 namespace Generation::Words
 {
-    std::string article( const WordPart& word )
+    std::string article( const WordPart& )
     {
         return "the";
     }

@@ -19,8 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\grammar\Grammar.cpp" />
-    <ClCompile Include="..\src\grammar\Reader.cpp" />
+    <ClCompile Include="..\src\grammar\Compiler.cpp" />
     <ClCompile Include="..\src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -32,7 +31,7 @@
     <ClInclude Include="..\src\generation\words\Verb.h" />
     <ClInclude Include="..\src\grammar\Grammar.h" />
     <ClInclude Include="..\src\grammar\Production.h" />
-    <ClInclude Include="..\src\grammar\Reader.h" />
+    <ClInclude Include="..\src\grammar\Compiler.h" />
     <ClInclude Include="..\src\grammar\Symbol.h" />
     <ClInclude Include="..\src\Mapping.h" />
   </ItemGroup>

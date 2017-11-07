@@ -23,7 +23,7 @@ namespace Generation
 
         void    addWord( const std::string& symbolName, const WordGenerator& word )
         {
-            words.insert( { mapping.symbols.find( symbolName )->second, word } );
+            words.insert( { mapping.symbols().at( symbolName ), word } );
         }
 
         std::string transform( const std::list<Grammar::Symbol>& string )

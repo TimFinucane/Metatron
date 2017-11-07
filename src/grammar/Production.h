@@ -44,35 +44,12 @@ namespace Grammar
         };
     public:
         Production() {}
-        Production( std::vector<unsigned int>&& symbols )
+        Production( std::vector<SymbolType>&& symbols )
             : symbols( std::move( symbols ) )
         {
         }
 
-        void    addSymbol( unsigned int symbol )
-        {
-            symbols.push_back( symbol );
-        }
-        void    addInternalLink( const InternalLink& link )
-        {
-            internalLinks.push_back( link );
-        }
-        void    addExternalLink( const ExternalLink& link )
-        {
-            externalLinks.push_back( link );
-        }
-
-        unsigned int    symbol( size_t index )
-        {
-            return symbols[index];
-        }
-        size_t          size()
-        {
-            return symbols.size();
-        }
-
-    private:
-        std::vector<unsigned int>   symbols;
+        std::vector<SymbolType>     symbols;
         std::vector<InternalLink>   internalLinks;
         std::vector<ExternalLink>   externalLinks;
     };

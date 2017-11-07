@@ -19,9 +19,10 @@ namespace Generation
         {
         }
 
+        // These will check whether the current word part has a link with the given properties
         bool            hasLink( const std::string& linkName ) const
         {
-            unsigned int linkType = mapping.links.find( linkName )->second;
+            unsigned int linkType = mapping.links().at( linkName );
 
             return std::find_if( symbol.links.begin(), symbol.links.end(),
                                  [linkType]( const Grammar::Symbol::Link& link ){ return link.type == linkType; }
@@ -29,20 +30,21 @@ namespace Generation
         }
         bool            hasLink( const std::string& linkName, const std::string& symbolName ) const
         {
-            unsigned int linkType = mapping.links.find( linkName )->second;
-            unsigned int symbolType = mapping.symbols.find( symbolName )->second;
+            unsigned int linkType = mapping.links().at( linkName );
+            unsigned int symbolType = mapping.symbols().at( symbolName );
 
             return std::find_if( symbol.links.begin(), symbol.links.end(),
                 [&]( const Grammar::Symbol::Link& link )
                 {
-                    return link.type == linkType && link.other->id == symbolType;
+                    return link.type == linkType && link.other().id == symbolType;
                 }
             ) != symbol.links.end();
         }
 
+        // Counts the number of links with the given properties
         unsigned int    linkCount( const std::string& linkName ) const
         {
-            unsigned int linkType = mapping.links.find( linkName )->second;
+            unsigned int linkType = mapping.links().at( linkName );
 
             unsigned int count = 0;
             for( const auto& link : symbol.links )
@@ -52,13 +54,13 @@ namespace Generation
         }
         unsigned int    linkCount( const std::string& linkName, const std::string& symbolName ) const
         {
-            unsigned int linkType = mapping.links.find( linkName )->second;
-            unsigned int symbolType = mapping.symbols.find( symbolName )->second;
+            unsigned int linkType = mapping.links().at( linkName );
+            unsigned int symbolType = mapping.symbols().at( symbolName );
 
             unsigned int count = 0;
             for( const auto& link : symbol.links )
             {
-                count += (link.type == linkType && link.other->id == symbolType);
+                count += (link.type == linkType && link.other().id == symbolType);
             }
         }
 

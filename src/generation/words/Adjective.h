@@ -4,7 +4,7 @@
 
 namespace Generation::Words
 {
-    std::string adjective( const WordPart& word )
+    std::string adjective( const WordPart& )
     {
         return "blue";
     }

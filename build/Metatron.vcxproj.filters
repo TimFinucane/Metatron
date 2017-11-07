@@ -2,10 +2,7 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp" />
-    <ClCompile Include="..\src\grammar\Grammar.cpp">
-      <Filter>grammar</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\grammar\Reader.cpp">
+    <ClCompile Include="..\src\grammar\Compiler.cpp">
       <Filter>grammar</Filter>
     </ClCompile>
   </ItemGroup>
@@ -45,12 +42,12 @@
     <ClInclude Include="..\src\generation\words\Article.h">
       <Filter>generation\words</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\grammar\Reader.h">
-      <Filter>grammar</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\Mapping.h" />
     <ClInclude Include="..\src\generation\WordPart.h">
       <Filter>generation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\grammar\Compiler.h">
+      <Filter>grammar</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
