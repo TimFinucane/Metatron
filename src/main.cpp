@@ -29,7 +29,7 @@ int main( int, char*[] )
     translator.addWord( "Adjective",   Generation::Words::adjective );
     translator.addWord( "Article",     Generation::Words::article );
 
-    std::cout << translator.transform( Grammar::generate( compiler.getMapping().symbols().at( "Sentence" ), compiler.getProductions() ) ) << std::endl;
+    std::cout << translator.transform( compiler.generate( "Sentence" ) ) << std::endl;
     
     // And silence
     std::cin.get();
