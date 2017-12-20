@@ -13,6 +13,14 @@
 
 namespace Grammar
 {
+	// Chooses a random item from an iterator range, where the first iterator may be chosen but not the last
+	template <typename Random, typename Iterator>
+	Iterator	chooseFromRange( std::pair<Iterator, Iterator> range, Random& engine )
+	{
+		std::uniform_int<> uniform( 0, (int)std::distance( range.first, range.second ) - 1 );
+		return std::next( range.first, uniform( engine ) );
+	}
+
     class Compiler
     {
     public:
@@ -40,7 +48,7 @@ namespace Grammar
 		// TODO: Add relative chances on each production
 		// Generates a series of terminal 'Word classes' from a starting symbol
 		template <typename Random>
-		std::list<Symbol>			generate( std::string headName, Random& random )
+		std::list<Symbol>	generate( std::string headName, Random& random ) const
 		{
 			SymbolType head = mapping.symbols().at( headName );
 
@@ -73,7 +81,7 @@ namespace Grammar
 					Symbol& us = *std::next( symbolIt, linkInfo.thisIndex + 1 );
 					Symbol& them = *std::next( symbolIt, linkInfo.otherIndex + 1 );
 
-					addLink( linkInfo.type, us, them );
+					Symbol::addLink( linkInfo.type, us, them );
 				}
 
 				// Add external links
@@ -86,56 +94,30 @@ namespace Grammar
 							Symbol& us = *std::next( symbolIt, externalLinkInfo.thisIndex + 1 );
 							Symbol& them = linkInf.other();
 
-							addLink( externalLinkInfo.newType, us, them );
+							Symbol::addLink( externalLinkInfo.newType, us, them );
 						}
 					}
 				}
 
 				// Now delete old symbol and continue
-				removeAllLinks( *symbolIt );
+				symbolIt->removeAllLinks();
 				symbolIt = string.erase( symbolIt );
 			}
 
 			return string;
 		}
-		inline std::list<Symbol>	generate( std::string headName )
+		std::list<Symbol>	generate( std::string headName ) const
 		{
 			std::default_random_engine engine{ std::random_device{}() }; // Use a completely random engine
 			return generate( headName, engine );
 		}
 
+		std::list<Symbol>	operator()( std::string head ) const
+		{
+			return generate( head );
+		}
+
     private:
-		// Chooses a random item from an iterator range, where the first iterator may be chosen but not the last
-		template <typename Random, typename Iterator>
-		Iterator		chooseFromRange( std::pair<Iterator, Iterator> range, Random& engine )
-		{
-			std::uniform_int<> uniform( 0, (int)std::distance( range.first, range.second ) - 1 );
-			return std::next( range.first, uniform( engine ) );
-		}
-
-		// Adds a link of given type between the two symbols
-		inline void		addLink( LinkType linkType, Symbol& a, Symbol& b )
-		{
-			a.links.push_back( { linkType, b } );
-			b.links.push_back( { linkType, a } );
-		}
-
-		// Removes all links that this symbol is part of
-		inline void		removeAllLinks( Symbol& symbol )
-		{
-			using std::iter_swap;
-
-			for( auto& linkInf : symbol.links )
-			{
-				auto& linkVector = linkInf.other().links;
-				// Swap and pop
-				auto it = std::find( linkVector.begin(), linkVector.end(), Symbol::Link{ linkInf.type, symbol } );
-				iter_swap( it, linkVector.end() - 1 );
-				linkVector.pop_back();
-			}
-			symbol.links.clear();
-		}
-
         Mapping mapping;
         std::multimap<SymbolType, Production>   productions;
     };

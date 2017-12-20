@@ -20,7 +20,6 @@ void printSymbolList( const std::list<Grammar::Symbol>& list, const Grammar::Com
 			std::cout << std::find_if( mapping.begin(), mapping.end(), [&]( const auto& pair ){ return pair.second == symbol.id; } )->first << " ";
 		}
 	}
-	std::cout << "." << std::endl;
 }
 
 int main( int, char*[] )
@@ -42,7 +41,7 @@ int main( int, char*[] )
     translator.addWord( "Article",     Generation::Words::article );
 	
 	// Get a sentence
-	std::list<Grammar::Symbol> sentenceGrammar = compiler.generate( "Sentence" );
+	std::list<Grammar::Symbol> sentenceGrammar = compiler( "Sentence" );
 	printSymbolList( sentenceGrammar, compiler );
 
 	// Print out sentence grammar
