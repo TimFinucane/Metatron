@@ -6,7 +6,7 @@ using namespace Grammar;
 
 using Tantrum = std::runtime_error;
 
-void Compiler::parseFile( const std::string& file )
+void Compiler::parse( const std::string& file )
 {
     // Reads a line into the head and the symbols of the production. Currently, productions may not go over one line
     std::regex line( R"(\s*(.*?)\s*->\s*(.*))" );

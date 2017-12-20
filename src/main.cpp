@@ -14,13 +14,13 @@
 int main( int, char*[] )
 {
     Grammar::Compiler compiler;
-    compiler.parseFile( "Sentence -> NounPhrase Verb" );
-    compiler.parseFile( "Sentence -> NounPhrase Verb NounPhrase" );
-    compiler.parseFile( "NounPhrase -> Article AdjectiveSequence Noun(0/has_article)" );
-    compiler.parseFile( "NounPhrase -> AdjectiveSequence Noun" );
-    compiler.parseFile( "NounPhrase -> Noun" );
-    compiler.parseFile( "AdjectiveSequence(/adjective) -> Adjective(/adjective) AdjectiveSequence(/adjective, 0/adjective)" );
-    compiler.parseFile( "AdjectiveSequence(/adjective) -> Adjective(/adjective)" );
+    compiler.parse( "Sentence -> NounPhrase Verb" );
+    compiler.parse( "Sentence -> NounPhrase Verb NounPhrase" );
+    compiler.parse( "NounPhrase -> Article AdjectiveSequence Noun(0/has_article)" );
+    compiler.parse( "NounPhrase -> AdjectiveSequence Noun" );
+    compiler.parse( "NounPhrase -> Noun" );
+    compiler.parse( "AdjectiveSequence(/adjective) -> Adjective(/adjective) AdjectiveSequence(/adjective, 0/adjective)" );
+    compiler.parse( "AdjectiveSequence(/adjective) -> Adjective(/adjective)" );
 
     // Form words from symbols
     Generation::Translator translator( compiler.getMapping() );

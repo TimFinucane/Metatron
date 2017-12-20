@@ -17,7 +17,7 @@ namespace Grammar
          * Reads a file, places found productions into the Former, and outputs a map of
          * symbol ids vs their name.
          */
-        void    parseFile( const std::string& file );
+        void    parse( const std::string& file );
 
         /*
         * Reads a single rule and converts it into a production
