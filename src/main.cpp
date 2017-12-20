@@ -11,6 +11,19 @@
 #include "generation/words/Adjective.h"
 #include "generation/words/Article.h"
 
+// Print out a sentences grammar
+void printSymbolList( const std::list<Grammar::Symbol>& list, const Grammar::Compiler& compiler )
+{
+	for( auto symbol : list )
+	{
+		auto mapping = compiler.getMapping().symbols();
+		{
+			std::cout << std::find_if( mapping.begin(), mapping.end(), [&]( const auto& pair ){ return pair.second == symbol.id; } )->first << " ";
+		}
+	}
+	std::cout << "." << std::endl;
+}
+
 int main( int, char*[] )
 {
     Grammar::Compiler compiler;
@@ -28,6 +41,12 @@ int main( int, char*[] )
     translator.addWord( "Noun",        Generation::Words::noun );
     translator.addWord( "Adjective",   Generation::Words::adjective );
     translator.addWord( "Article",     Generation::Words::article );
+	
+	// Get a sentence
+	std::list<Grammar::Symbol> sentenceGrammar = compiler.generate( "Sentence" );
+	printSymbolList( sentenceGrammar, compiler );
+
+	// Print out sentence grammar
 
     std::cout << translator.transform( compiler.generate( "Sentence" ) ) << std::endl;
     
