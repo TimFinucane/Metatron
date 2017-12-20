@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 
-#include "grammar/Grammar.h"
 #include "generation/Generation.h"
 
 #include "grammar/Compiler.h"
@@ -47,8 +46,7 @@ int main( int, char*[] )
 	printSymbolList( sentenceGrammar, compiler );
 
 	// Print out sentence grammar
-
-    std::cout << translator.transform( compiler.generate( "Sentence" ) ) << std::endl;
+    std::cout << translator.transform( sentenceGrammar ) << std::endl;
     
     // And silence
     std::cin.get();

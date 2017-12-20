@@ -29,7 +29,6 @@
     <ClInclude Include="..\src\generation\words\Article.h" />
     <ClInclude Include="..\src\generation\words\Noun.h" />
     <ClInclude Include="..\src\generation\words\Verb.h" />
-    <ClInclude Include="..\src\grammar\Grammar.h" />
     <ClInclude Include="..\src\grammar\Production.h" />
     <ClInclude Include="..\src\grammar\Compiler.h" />
     <ClInclude Include="..\src\grammar\Symbol.h" />
