@@ -31,8 +31,8 @@ namespace Grammar
         void    parse( const std::string& file );
 
         /*
-        * Reads a single rule and converts it into a production
-        */
+         * Reads a single rule and converts it into a production
+         */
         void    parseRule( const std::string& head, const std::string& rule );
 
         // Members
@@ -123,8 +123,8 @@ namespace Grammar
     };
 
     /*
-    * A compilation exception occurs when bad input was passed in.
-    */
+     * A compilation exception occurs when bad input was passed in.
+     */
     class CompilationException : public std::runtime_error
     {
     public:

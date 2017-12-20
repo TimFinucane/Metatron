@@ -16,9 +16,9 @@ namespace Grammar
         friend class Former;
 
         /*
-        * An external link creates a symbol made by a production with
-        * the symbol linked to by that production's head.
-        */
+         * An external link creates a symbol made by a production with
+         * the symbol linked to by that production's head.
+         */
         struct ExternalLink
         {
             // The link type to find from the original link
@@ -33,8 +33,8 @@ namespace Grammar
         };
 
         /*
-        * A link between two items in a production
-        */
+         * A link between two items in a production
+         */
         struct InternalLink
         {
             unsigned int type;
