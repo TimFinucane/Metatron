@@ -5,6 +5,11 @@
 
 #include "grammar/Symbol.h"
 
+/*
+ * A mapping maps from words to ids for symbols and links. It is created by the compiler
+ * and helps for creation and debugging purposes. The symbol mapping contains relations such as Noun -> 1,
+ * and links contains things like adjective -> 3, where adjective is the link of an Adjective to a Noun
+ */
 struct Mapping
 {
     using SymbolType = Grammar::SymbolType;

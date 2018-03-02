@@ -44,7 +44,7 @@ namespace Generation
 
         std::string transform( const Symbol& symbol )
         {
-            return words[symbol.id]( symbol, mapping );
+            return words.at( symbol.id )( symbol, mapping );
         }
 
         std::string operator()( const Symbol& symbol )
