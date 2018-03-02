@@ -36,6 +36,15 @@ public:
         }
     }
 
+    SymbolType  symbol( const std::string& str ) const
+    {
+        return symbolMap.at( str );
+    }
+    LinkType    link( const std::string& str ) const
+    {
+        return linkMap.at( str );
+    }
+
     const std::map<std::string, SymbolType>&    symbols() const
     {
         return symbolMap;

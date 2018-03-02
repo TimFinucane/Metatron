@@ -13,12 +13,11 @@
 // Print out a sentences grammar
 void printSymbolList( const std::list<Grammar::Symbol>& list, const Grammar::Compiler& compiler )
 {
-	for( auto symbol : list )
+	for( auto& symbol : list )
 	{
-		auto mapping = compiler.getMapping().symbols();
-		{
-			std::cout << std::find_if( mapping.begin(), mapping.end(), [&]( const auto& pair ){ return pair.second == symbol.id; } )->first << " ";
-		}
+		auto& mapping = compiler.getMapping().symbols();
+        // Reverse search for the name of the given symbol
+	    std::cout << std::find_if( mapping.begin(), mapping.end(), [&]( const auto& pair ){ return pair.second == symbol.id; } )->first << " ";
 	}
 }
 
@@ -40,11 +39,12 @@ int main( int, char*[] )
     translator.addWord( "Adjective",   Generation::Words::adjective );
     translator.addWord( "Article",     Generation::Words::article );
 	
-	// Get a sentence
-	std::list<Grammar::Symbol> sentenceGrammar = compiler( "Sentence" );
-	printSymbolList( sentenceGrammar, compiler );
+    // Get a sentence
+    std::list<Grammar::Symbol> sentenceGrammar = compiler( "Sentence" );
+    printSymbolList( sentenceGrammar, compiler );
+    std::cout << std::endl;
 
-	// Print out sentence grammar
+    // Print out sentence grammar
     std::cout << translator.transform( sentenceGrammar ) << std::endl;
     
     // And silence

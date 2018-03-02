@@ -7,8 +7,7 @@
 #include <random>
 #include <list>
 
-#include <Mapping.h>
-
+#include "Mapping.h"
 #include "Production.h"
 
 namespace Grammar
@@ -100,7 +99,6 @@ namespace Grammar
 				}
 
 				// Now delete old symbol and continue
-				symbolIt->removeAllLinks();
 				symbolIt = string.erase( symbolIt );
 			}
 

@@ -40,9 +40,6 @@
       <Filter>generation\words</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Mapping.h" />
-    <ClInclude Include="..\src\generation\WordPart.h">
-      <Filter>generation</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\grammar\Compiler.h">
       <Filter>grammar</Filter>
     </ClInclude>

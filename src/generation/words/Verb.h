@@ -1,10 +1,11 @@
 #pragma once
 
-#include <generation/WordPart.h>
+#include "grammar/Symbol.h"
+#include "Mapping.h"
 
 namespace Generation::Words
 {
-    std::string verb( const WordPart& )
+    std::string verb( const Grammar::Symbol&, const Mapping& )
     {
         return "ate";
     }
