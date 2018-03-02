@@ -1,0 +1,6 @@
+Metatron is a project for generating random sentences.
+
+This works in two parts, firstly a dynamic grammar constructor, which converts rules relating certain grammar parts to other grammar parts in a self-made simplistic DSL similar to a formal grammar production language (e.g. Backus-Naur).
+Secondly, a translator that converts from word parts (e.g. Noun) to actual words (e.g. George).
+
+License info is found in the LICENSE file. Instructions on how to use are incomplete, but can for the most part be guessed at from looking in the data folder and at the main file.
